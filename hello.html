@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello</title>
+<style>
+  :root { --bg:#fafaf9; --fg:#1c1917; --sub:#78716c; --accent:#2563eb; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#141413; --fg:#f5f5f4; --sub:#a8a29e; --accent:#60a5fa; }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    min-height: 100vh; display: grid; place-items: center; padding: 16px;
+    background: var(--bg); color: var(--fg);
+    font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+  }
+  main { text-align: center; }
+  h1 { font-size: clamp(3rem, 14vw, 7rem); letter-spacing: -0.04em; font-weight: 700; }
+  h1 span { color: var(--accent); }
+  p { margin-top: 12px; color: var(--sub); font-size: 1.125rem; }
+  button {
+    margin-top: 28px; padding: 10px 20px; border: 1px solid var(--sub); border-radius: 8px;
+    background: transparent; color: var(--fg); font: inherit; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="word">Hello<span>.</span></h1>
+  <p>안녕하세요, 반갑습니다.</p>
+  <button id="btn" type="button">다른 언어로 인사하기</button>
+</main>
+<script>
+  const greetings = [
+    ["Hello", "영어"], ["안녕", "한국어"], ["こんにちは", "일본어"],
+    ["你好", "중국어"], ["Hola", "스페인어"], ["Bonjour", "프랑스어"]
+  ];
+  let i = 0;
+  const word = document.getElementById("word");
+  const sub = document.querySelector("p");
+  document.getElementById("btn").addEventListener("click", () => {
+    i = (i + 1) % greetings.length;
+    word.innerHTML = greetings[i][0] + "<span>.</span>";
+    sub.textContent = greetings[i][1] + "로 인사했어요.";
+  });
+</script>
+</body>
+</html>
