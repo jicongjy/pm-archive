@@ -4,7 +4,9 @@
   "type": "module",
   "description": "셀렉트마켓 채팅 실습용 로컬 서버. 키는 ../.env 에서만 읽는다.",
   "scripts": {
-    "start": "node --env-file=../.env server.mjs"
+    "start": "node --env-file=../.env server.mjs",
+    "build:web": "node build-web.mjs",
+    "deploy": "node build-web.mjs && npx firebase-tools deploy --only hosting,firestore"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0"

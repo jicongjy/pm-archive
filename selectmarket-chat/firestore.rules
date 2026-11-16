@@ -1,0 +1,35 @@
+rules_version = '2';
+// 누가 무엇을 할 수 있나
+//  - 손님(익명 로그인): 자기 대화 기록을 남기고, 자기 대화에 신고만 추가. 지침·스토어 표는 읽기만.
+//  - 관리자(구글 로그인 + admins 문서가 있는 이메일): 모든 대화 읽기·피드백·삭제, 지침·스토어 표 수정.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn() && request.auth.token.email != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.token.email));
+    }
+
+    // 관리자 명단: 내 이메일 문서가 있는지만 확인할 수 있음. 만들기·고치기는 콘솔에서만.
+    match /admins/{email} {
+      allow get: if signedIn() && request.auth.token.email == email;
+    }
+
+    match /chatlogs/{id} {
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['id','tab','q','a','names','track','src','meta','path','gl','at','report','fb','uid'])
+        && request.resource.data.fb == null
+        && request.resource.data.q is string && request.resource.data.q.size() <= 2000
+        && request.resource.data.a is string && request.resource.data.a.size() <= 8000;
+      allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow update: if isAdmin()
+        || (signedIn() && resource.data.uid == request.auth.uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['report']));
+      allow delete: if isAdmin();
+    }
+
+    match /config/{doc} { allow read: if true; allow write: if isAdmin(); }
+    match /store/{doc}  { allow read: if true; allow write: if isAdmin(); }
+  }
+}
