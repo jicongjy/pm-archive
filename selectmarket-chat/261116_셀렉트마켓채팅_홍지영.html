@@ -232,7 +232,7 @@
 <div class="apage" id="apage" hidden>
   <div class="ahead">
     <div><h2>관리자 콘솔</h2><p>퇴근 후 8시 스토어 · 운영자만 보는 화면이에요</p></div>
-    <button class="reset" id="aback" type="button">← 채팅 화면으로</button>
+    <div class="hbtns"><button class="reset" id="alogout" type="button" hidden>로그아웃</button><button class="reset" id="aback" type="button">← 채팅 화면으로</button></div>
   </div>
   <div class="abody"><nav class="anav" id="anav" aria-label="관리자 메뉴"></nav><div class="admin" id="admin"></div></div>
 </div>
@@ -574,7 +574,7 @@ function render() {
   $("health").hidden = true;
   $("title").textContent = t.title; $("notice").textContent = t.notice;
   $("subtitle").hidden = cur === "t4";
-  $("adminbtn").hidden = !(owner && cur === "t4");
+  $("adminbtn").hidden = !(cur === "t4" && (owner || fb)); $("adminbtn").textContent = fb && !owner ? "관리자 로그인" : "관리자"; $("alogout").hidden = !fb;
   const log = $("log"); log.innerHTML = "";
   const hero = !!t.guide && state[cur].length === 1 && !busy && !showAdmin;
   log.classList.toggle("hero", hero);
@@ -635,6 +635,7 @@ async function callAI(prompt, opts, tabId) {
     if (!sample) throw { code: "unavailable" };
     return sample(prompt, opts);
   }
+  if (fb) throw { local: true, message: "이 배포 주소에는 AI 서버가 연결돼 있지 않아요(무료 요금제). 목록에 있는 질문은 그대로 답해요. AI 답변은 내 컴퓨터에서 npm start 로 확인해 주세요." };
   let res;
   try { res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ prompt, tab: tabId }) }); }
   catch (e) { throw { local: true, message: "AI 서버에 연결하지 못했어요. 터미널에서 npm start 로 서버를 켜고, 주소창이 http://localhost:… 인지 확인해 주세요." }; }
@@ -653,29 +654,34 @@ async function callAI(prompt, opts, tabId) {
   return { text, gl: Number(res.headers.get("X-Guidelines")) || 0 };
 }
 
+const mineIds = new Set(); let wantAdmin = false;
+const fb = window.SMC_FB || null; // Firebase 배포판에서만 있음 (firebase-adapter.js)
 const LOGKEY = "smc-log", RULEKEY = "smc-rules";
 const PATHS = { quick: "즉시 조회", ai: "AI 답변", fake: "미리 쓴 답", error: "오류" };
 function loadLocal() {
+  if (fb) { LOG = []; RULES = []; return; }
   try { const j = JSON.parse(localStorage.getItem(LOGKEY) || "[]"); LOG = Array.isArray(j) ? j : []; } catch (e) { LOG = []; }
   try { const j = JSON.parse(localStorage.getItem(RULEKEY) || "[]"); RULES = Array.isArray(j) ? j : []; } catch (e) { RULES = []; }
 }
 function saveLog() {
+  if (fb) return true;
   if (LOG.length > 500) LOG = LOG.slice(-500);
   try { localStorage.setItem(LOGKEY, JSON.stringify(LOG)); logWarn = false; return true; } catch (e) { logWarn = true; return false; }
 }
 function rec(tabId, q, m, path) {
   const names = (m.cards || []).map(c => c.name).concat((m.list || []).map(x => x.name));
   const e = { id: "L" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), tab: tabId, q, a: m.text || "", names, track: m.track || "", src: m.src || "", meta: m.meta || "", path, gl: m.gl || 0, at: Date.now(), report: null, fb: null };
-  LOG.push(e); saveLog(); m.logId = e.id; return e;
+  LOG.push(e); mineIds.add(e.id); saveLog(); if (fb) fb.setLog(e, "create"); m.logId = e.id; return e;
 }
 const logOf = id => LOG.find(x => x.id === id);
-function reportAnswer(id, reason) { const e = logOf(id); if (!e) return; e.report = { reason, at: Date.now() }; rptOpen = null; saveLog(); render(); }
+function reportAnswer(id, reason) { const e = logOf(id); if (!e) return; e.report = { reason, at: Date.now() }; rptOpen = null; saveLog(); if (fb) fb.setLog(e, "report"); render(); }
 function ruleText(tabId) {
   const a = RULES.filter(x => x.on && (x.tab === "all" || x.tab === tabId)).slice(0, 30);
   if (!a.length) return { text: "", n: 0 };
   return { n: a.length, text: "[운영자 피드백 지침]\n아래는 운영자가 실제 대화를 검토하고 남긴 지침이야. 위 답변 규칙과 함께 반드시 지키고, 충돌하면 이 지침을 우선해.\n" + a.map((x, i) => (i + 1) + ". " + x.rule + (x.ex ? " (참고 질문: \"" + x.ex + "\")" : "")).join("\n") };
 }
 async function persistRules() {
+  if (fb) { try { await fb.saveRules(RULES); return "cloud"; } catch (e) { return "fail"; } }
   try { localStorage.setItem(RULEKEY, JSON.stringify(RULES)); } catch (e) {}
   if (!srv) return "local";
   try {
@@ -683,7 +689,8 @@ async function persistRules() {
     if (!r.ok) throw 0; return "server";
   } catch (e) { return "fail"; }
 }
-const ruleMsg = k => k === "server" ? "서버 파일(data/guidelines.json)에 저장했어요. 다음 AI 답변부터 적용돼요."
+const ruleMsg = k => k === "cloud" ? "Firebase에 저장했어요. 다음 AI 답변부터 적용돼요."
+  : k === "server" ? "서버 파일(data/guidelines.json)에 저장했어요. 다음 AI 답변부터 적용돼요."
   : k === "local" ? "이 브라우저에 저장했어요. 이 화면에서 AI를 부를 때 지침으로 붙여요." : "서버에 저장하지 못했어요. 서버가 켜져 있는지 확인해 주세요. 이 브라우저에는 저장했어요.";
 async function saveFb(id) {
   const e = logOf(id), d = fbDraft[id]; if (!e || !d) return;
@@ -697,6 +704,7 @@ async function saveFb(id) {
     if (i >= 0) RULES[i] = item; else RULES.push(item);
   } else if (i >= 0) RULES.splice(i, 1);
   const okLog = saveLog(), k = await persistRules();
+  if (fb) { try { await fb.setLog(e, "fb"); } catch (x) { adminMsg = "피드백을 Firebase에 저장하지 못했어요. 로그인과 권한을 확인해 주세요."; adminErr = true; renderAdmin(); return; } }
   logOpen[id] = false; delete fbDraft[id];
   adminMsg = (okLog ? "피드백을 저장했어요. " : "피드백을 저장하지 못했어요(저장 공간 부족). ") + (d.apply ? ruleMsg(k) : ""); adminErr = !okLog || k === "fail";
   renderAdmin();
@@ -722,7 +730,7 @@ async function ask(text) {
   const lv = live, start = performance.now(); let first = 0;
   const history = state[tabId].slice(1).map(m => (m.role === "me" ? "사용자: " : "도우미: ") + m.text).join("\n");
   const sys = t.rich ? t.system + "\n\n[스토어 데이터 · 기준일 " + DATA_DATE + "]\n" + storeText() : t.system;
-  const cg = (window.claude && claude.use) ? ruleText(tabId) : { text: "", n: 0 };
+  const cg = ((window.claude && claude.use) || fb) ? ruleText(tabId) : { text: "", n: 0 };
   const prompt = sys + (cg.text ? "\n\n" + cg.text : "") + "\n\n[지금까지의 대화]\n" + history + "\n\n위 대화에 이어 도우미의 다음 답만 써 줘. 앞에 '도우미:'는 붙이지 마.";
   try {
     const opts = { cache: false, modelTier: "quick" };
@@ -792,7 +800,8 @@ async function saveTable(name) {
   if (err) { adminMsg = "저장하지 못했어요. " + err; adminErr = true; renderAdmin(); return; }
   const items = clone(draft[name]);
   try {
-    if (dbh) { await dbh.doc("store/" + name).set({ items }); adminMsg = ANAMES[name] + " 표를 저장했어요. 챗봇 답에 바로 반영돼요."; }
+    if (fb) { await fb.saveStore(name, items); adminMsg = ANAMES[name] + " 표를 Firebase에 저장했어요. 모든 사용자의 챗봇 답에 반영돼요."; }
+    else if (dbh) { await dbh.doc("store/" + name).set({ items }); adminMsg = ANAMES[name] + " 표를 저장했어요. 챗봇 답에 바로 반영돼요."; }
     else if (standalone) {
       const all = {}; Object.keys(ANAMES).forEach(k => { all[k] = k === name ? items : DATA[k]; });
       localStorage.setItem("smc-store", JSON.stringify(all));
@@ -864,7 +873,7 @@ function selectEl(opts, val, on) {
 }
 function pushMsg(box) { if (adminMsg) box.appendChild(el("p", "amsg" + (adminErr ? " err" : ""), adminMsg)); }
 function renderLogView(box) {
-  box.appendChild(el("p", "amsg", "사용자가 나눈 대화가 이 브라우저에 자동으로 저장돼요(최근 500건). 잘못된 답에는 사용자 신고가 붙고, 여기서 피드백을 남기면 지침으로 모아 다음 답변에 써요." + (logWarn ? " 저장 공간이 가득 차 최근 기록이 저장되지 않았어요." : "")));
+  box.appendChild(el("p", "amsg", "사용자가 나눈 대화가 " + (fb ? "Firebase에 자동으로 저장돼요(최근 500건 표시). " : "이 브라우저에 자동으로 저장돼요(최근 500건). ") + "잘못된 답에는 사용자 신고가 붙고, 여기서 피드백을 남기면 지침으로 모아 다음 답변에 써요." + (logWarn ? " 저장 공간이 가득 차 최근 기록이 저장되지 않았어요." : "")));
   const tabName = id => (tabOf(id) || { name: id }).name;
   const base = LOG.filter(e => logF.tab === "all" || e.tab === logF.tab);
   const ai = base.filter(e => e.path === "ai").length, qk = base.filter(e => e.path === "quick").length;
@@ -892,7 +901,7 @@ function renderLogView(box) {
   rows.slice(0, logShown).forEach(e => box.appendChild(logRow(e, tabName)));
   if (rows.length > logShown) { const b = el("button", "abtn", "50건 더 보기"); b.type = "button"; b.onclick = () => { logShown += 50; renderAdmin(); }; const w = el("div", "arow"); w.appendChild(b); box.appendChild(w); }
   const w = el("div", "arow"), clr = el("button", "abtn", logOpen.__clr ? "정말 모두 지울까요? 한 번 더 누르면 지워요" : "대화 기록 모두 지우기"); clr.type = "button";
-  clr.onclick = () => { if (!logOpen.__clr) { logOpen.__clr = true; renderAdmin(); return; } logOpen.__clr = false; LOG = []; saveLog(); adminMsg = "대화 기록을 모두 지웠어요. 지침은 그대로 남아 있어요."; adminErr = false; render(); renderAdmin(); };
+  clr.onclick = () => { if (!logOpen.__clr) { logOpen.__clr = true; renderAdmin(); return; } logOpen.__clr = false; LOG = []; saveLog(); if (fb) fb.clearLogs(); adminMsg = "대화 기록을 모두 지웠어요. 지침은 그대로 남아 있어요."; adminErr = false; render(); renderAdmin(); };
   w.appendChild(clr); box.appendChild(w); pushMsg(box);
 }
 function logRow(e, tabName) {
@@ -928,7 +937,7 @@ function logRow(e, tabName) {
   return r;
 }
 function renderRulesView(box) {
-  box.appendChild(el("p", "amsg", "관리자 피드백에서 \"지침으로 반영\"한 문장이 여기에 모여요. 켜 둔 지침은 AI가 답할 때마다 규칙 뒤에 붙어요. " + (srv ? "이 지침은 서버 파일(data/guidelines.json)에 저장돼서 서버를 껐다 켜도 남아요." : "이 화면에서는 지침이 이 브라우저에 저장돼요.")));
+  box.appendChild(el("p", "amsg", "관리자 피드백에서 \"지침으로 반영\"한 문장이 여기에 모여요. 켜 둔 지침은 AI가 답할 때마다 규칙 뒤에 붙어요. " + (fb ? "이 지침은 Firebase에 저장돼서 모든 사용자의 답변에 적용돼요." : srv ? "이 지침은 서버 파일(data/guidelines.json)에 저장돼서 서버를 껐다 켜도 남아요." : "이 화면에서는 지침이 이 브라우저에 저장돼요.")));
   if (!RULES.length) box.appendChild(el("p", "amsg", "아직 지침이 없어요. 대화 기록에서 피드백을 남기거나 아래에서 직접 추가해 보세요."));
   RULES.forEach((r, i) => {
     const row = el("div", "lrow"), h = el("div", "lhead");
@@ -950,7 +959,9 @@ function renderRulesView(box) {
   act.appendChild(sv); box.appendChild(act); pushMsg(box);
 }
 $("aback").onclick = () => { adminOpen = false; render(); window.scrollTo(0, 0); };
+$("alogout").onclick = async () => { adminOpen = false; await fb.logout(); };
 $("adminbtn").onclick = () => {
+  if (fb && !owner) { wantAdmin = true; fb.login().catch(e => { wantAdmin = false; alert("로그인하지 못했어요."); }); return; }
   adminOpen = !adminOpen;
   if (adminOpen) { draft = clone(DATA); adminTab = "log"; adminMsg = ""; }
   render(); if (adminOpen) renderAdmin();
@@ -960,6 +971,20 @@ try { const s = localStorage.getItem("smc-tab"); if (s && tabOf(s)) cur = s; } c
 loadLocal();
 render();
 (async () => {
+  if (fb) {
+    try {
+      await fb.init(isA => {
+        owner = isA;
+        if (isA && wantAdmin) { wantAdmin = false; adminOpen = true; draft = clone(DATA); adminTab = "log"; adminMsg = ""; }
+        if (isA) fb.loadLogs().then(l => { LOG = l; if (adminOpen) renderAdmin(); render(); }).catch(() => {});
+        else { LOG = LOG.filter(x => mineIds.has(x.id)); adminOpen = false; }
+        render(); if (adminOpen) renderAdmin();
+      });
+      const st = await fb.loadStore(); Object.keys(ANAMES).forEach(k => { if (Array.isArray(st[k])) DATA[k] = st[k]; });
+      RULES = await fb.loadRules();
+    } catch (e) { console.warn("Firebase 연결 실패", e); }
+    render(); return;
+  }
   if (!(window.claude && claude.use)) {
     standalone = true; owner = true;
     try { const j = JSON.parse(localStorage.getItem("smc-store") || "{}"); Object.keys(ANAMES).forEach(k => { if (Array.isArray(j[k])) DATA[k] = j[k]; }); } catch (e) {}
