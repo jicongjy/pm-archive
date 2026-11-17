@@ -2,7 +2,11 @@
 """비공개 노트 저장소에서 '공개: 예'로 표시한 노트만 골라 사이트용으로 정리해 내보낸다.
 
 사용법
-  python3 tools/export_notes.py <노트 저장소 경로> [--dry-run]
+  python3 tools/export_notes.py <노트 저장소 경로> [--dry-run] [--full]
+
+  --full  수업 내용 정리(교안 요약, 강사 Q&A 포함), 회고, 링크 구역까지 모두 내보낸다.
+          출처와 메모 구역, 내부용 표시 줄, 강사 이름, 앱스 스크립트 실행 주소, 전화번호 모양 예시는 뺀다.
+          이 도구가 만들지 않은 노트(저장소에 없는 노트)는 그대로 둔다.
 
 동작
   1. notes/ 아래 마크다운 중 앞부분 20줄 안에 '공개: 예' 줄이 있는 노트만 고른다.
@@ -25,12 +29,32 @@ HEADER = re.compile(r"^\s*(공개|결과물|용어|한줄)\s*[:：]\s*(.*?)\s*$"
 DROP_HEADING = re.compile(r"교안|슬랙|회고|출처|메모|과제|링크|다음에|강사|피드백|정리자|참고")
 KEEP_HEADING = re.compile(r"내 실습|직접 실습|직접 해|별도 실습|실습 기록|실습 결과|내가|제가|만든|산출물|배운 점|느낀 점|해 보고 싶|겪은 문제|개선|결정")
 DROP_LINE = re.compile(r"교안|슬랙|강사|셀렉트웨이|비공개|미기입|내부|학습 저장소|multicampus-ai-product-manager")
+# --full 모드: 구역은 거의 다 남기고, 아래만 뺀다.
+# 주소 조각: 비공개 문서, 수강생 전체가 같이 쓰는 강사 소유 시트, 공유 권한을 확인하지 못한 코랩
+FULL_DROP_HEADING = re.compile(r"^출처|출처와 메모|^메모$")
+FULL_DROP_LINE = re.compile(r"비공개 저장소용|내부용|외부 공유 금지|_내부|학습 저장소|multicampus-ai-product-manager|script\.google\.com/macros|1PkzHAKPBgH7je1UFLhY0A6JeACFV_dAZLmJgSyYImEQ|1vewYqkCvUszZiCnVKuSYrHmM8oGZa1Zjvlfu8JX_3bo|1xFQmwIyhGNW2OXVxaNZ47g2UyBn-FyQD|코랩 링크는 공유 설정")
+# 눌러도 열리지 않거나 내 컴퓨터에서만 되는 주소는 링크로 만들지 않고 글자로만 둔다.
+NO_LINK = re.compile(r"localhost|127\.0\.0\.1|platform\.claude\.com/settings")
+PHONE_EXAMPLE = re.compile(r"01[016789][- ]?\d{3,4}[- ]?\d{4}")
 SENSITIVE = [
     ("이메일", re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")),
     ("전화번호", re.compile(r"01[016789][- ]?\d{3,4}[- ]?\d{4}")),
     ("API 키", re.compile(r"AIza[0-9A-Za-z_\-]{20,}|sk-[A-Za-z0-9_\-]{20,}|ghp_[A-Za-z0-9]{20,}|xox[baprs]-[A-Za-z0-9-]{10,}")),
     ("앱스 스크립트 주소", re.compile(r"script\.google\.com/macros")),
 ]
+SENSITIVE_FULL = [x for x in SENSITIVE if x[0] != "앱스 스크립트 주소"]  # --full은 해당 줄을 미리 뺀다
+
+
+def scrub_names(t):
+    """강사 이름과 기관 표기를 '강사'로 줄이고, 전화번호 모양 예시는 가린다."""
+    t = re.sub(r"셀렉트웨이\s*김수정\s*강사", "강사", t)
+    t = re.sub(r"강사\s*김수정\s*\(\s*셀렉트웨이\s*\)", "강사", t)
+    t = re.sub(r"강사\s*김수정\s*,\s*셀렉트웨이", "강사", t)
+    t = re.sub(r"강사\s*김수정", "강사", t)
+    t = t.replace("김수정", "강사")
+    t = PHONE_EXAMPLE.sub("0XX-XXXX-XXXX", t)
+    return t
+
 DATE = re.compile(r"(20\d{2})-(\d{2})-(\d{2})")
 YYMMDD = re.compile(r"\b(\d{2})(\d{2})(\d{2})\b")
 
@@ -61,7 +85,7 @@ def heading(line):
     return (len(m.group(1)), m.group(2).strip()) if m else None
 
 
-def clean(lines, report):
+def clean(lines, report, full=False):
     """내가 만든 것과 내 생각 구역만 남긴다. 수업 내용을 옮긴 구역은 저작권 때문에 뺀다."""
     pre, secs, fence = [], [], False
     cur = None
@@ -83,6 +107,13 @@ def clean(lines, report):
             stack.pop()
         stack.append(sec)
         path = [x["text"] for x in stack]
+        if full:
+            if any(FULL_DROP_HEADING.search(t) for t in path):
+                report.append("구역 제거: " + sec["text"])
+                continue
+            report.append("구역 유지: " + sec["text"])
+            out.extend(sec["lines"])
+            continue
         if any(DROP_HEADING.search(t) for t in path):
             report.append("구역 제거: " + sec["text"])
             continue
@@ -94,6 +125,12 @@ def clean(lines, report):
 
     kept = []
     for line in out:
+        if full:
+            if FULL_DROP_LINE.search(line):
+                report.append("줄 제거: " + line.strip()[:70])
+                continue
+            kept.append(scrub_names(line))
+            continue
         if DROP_LINE.search(line):
             report.append("줄 제거: " + line.strip()[:70])
             continue
@@ -123,11 +160,20 @@ def inline(text):
 
     def link(m):
         label, url = m.group(1), html.unescape(m.group(2))
-        if re.match(r"^https?://", url):
+        if re.match(r"^https?://", url) and not NO_LINK.search(url):
             return '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>' % (html.escape(url, quote=True), label)
         return label
 
     t = re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", link, t)
+    # 글 속에 그냥 적힌 주소도 눌러서 열 수 있게 한다. 이미 링크인 것은 건드리지 않는다.
+    def bare(m):
+        url = m.group(1).rstrip(".,;:")
+        tail = m.group(1)[len(url):]
+        if NO_LINK.search(url):
+            return m.group(1)
+        return '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>%s' % (url, url, tail)
+
+    t = re.sub(r'(?<![">=/\w])(https?://[^\s<>"]+)', bare, t)
     return t
 
 
@@ -332,6 +378,7 @@ def print_report(entries, terms, work_ids):
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     dry = "--dry-run" in sys.argv
+    full = "--full" in sys.argv
     if not args:
         print(__doc__)
         return 1
@@ -349,21 +396,22 @@ def main():
             lines.pop(0)
         date, wk, title = meta(path, lines)
         report = []
-        body_lines = clean(lines[1:] if heading(lines[0]) else lines, report)
+        body_lines = clean(lines[1:] if heading(lines[0]) else lines, report, full)
         header_text = "\n".join([info["one"]] + [t["name"] + " " + t["def"] for t in info["terms"]] + info["works"])  # 제거 전 원문까지 모두 검사
+        drop_hdr = FULL_DROP_LINE if full else DROP_LINE
         for w in list(info["works"]):
-            if DROP_LINE.search(w) or w not in work_ids:
+            if drop_hdr.search(w) or w not in work_ids:
                 report.append("머리말 결과물 제거(제외 단어 또는 없는 아이디): " + w[:40])
                 info["works"].remove(w)
         for t in list(info["terms"]):
-            if DROP_LINE.search(t["name"] + " " + t["def"]):
+            if drop_hdr.search(t["name"] + " " + t["def"]):
                 report.append("머리말 용어 제거: " + t["name"])
                 info["terms"].remove(t)
-        if DROP_LINE.search(info["one"]):
+        if drop_hdr.search(info["one"]):
             report.append("머리말 한줄 제거: " + info["one"][:50])
             info["one"] = ""
         text = "\n".join(body_lines) + "\n" + header_text
-        hits = [(n, p.search(text) or p.search(title)) for n, p in SENSITIVE]
+        hits = [(n, p.search(text) or p.search(title)) for n, p in (SENSITIVE_FULL if full else SENSITIVE)]
         hits = [n for n, m in hits if m]
         rel = path.relative_to(repo)
         print("\n== %s" % rel)
@@ -388,6 +436,19 @@ def main():
             out.parent.mkdir(exist_ok=True)
             out.write_text(render(body_lines) + "\n", encoding="utf-8")
         print("  + 내보냄: %s" % nid)
+    if full:
+        # 저장소에 없는 노트(사이트에서 직접 쓴 노트)는 그대로 둔다.
+        old_notes = json.loads((ROOT / "data" / "notes.json").read_text(encoding="utf-8"))["notes"]
+        old_terms = {t["name"]: t for t in json.loads((ROOT / "data" / "terms.json").read_text(encoding="utf-8"))["terms"]}
+        new_ids = {e["id"] for e in entries}
+        for e in old_notes:
+            if e["id"] in new_ids:
+                continue
+            entries.append(e)
+            for name in e["terms"]:
+                if name in old_terms:
+                    all_terms.append(({"name": name, "def": old_terms[name]["def"]}, e["date"], e["id"]))
+            print("  = 그대로 둠(저장소에 없는 노트): " + e["id"])
     entries.sort(key=lambda e: (e["date"], e["id"]), reverse=True)
     terms = build_terms(all_terms, entries)
     print_report(entries, terms, work_ids)
