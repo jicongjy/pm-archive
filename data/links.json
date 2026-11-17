@@ -1,6 +1,15 @@
 {
   "links": [
     {
+      "id": "l-ref-petfriends",
+      "title": "펫프렌즈 모바일 홈 (챗봇 개선 참고)",
+      "url": "https://m.pet-friends.co.kr/main/tab/2",
+      "note": "반려동물 쇼핑몰 · 상담 채팅 UX 참고",
+      "date": "2026-11-16",
+      "week": "week-04",
+      "icon": "assets/links/l-ref-petfriends.png"
+    },
+    {
       "id": "l-ref-toss-geo",
       "title": "SEO를 넘어 GEO로, 생성형 AI 시대 이커머스 대응 전략",
       "url": "https://www.tosspayments.com/blog/articles/39461",

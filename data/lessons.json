@@ -27,6 +27,13 @@
       "url": "https://loreenkim0301.github.io/swy-lecturenote/261109-ai-pm-week3/d2-web-crawling.html",
       "week": "week-03",
       "date": "2026-11-10"
+    },
+    {
+      "id": "ls-w4d1-chatbot",
+      "title": "4주차 DAY1 교안: 클로드 코드로 챗봇 만들기",
+      "url": "https://loreenkim0301.github.io/swy-lecturenote/261116-ai-pm-week4/d1-claude-code-chatbot.html",
+      "week": "week-04",
+      "date": "2026-11-16"
     }
   ]
 }
