@@ -38,6 +38,33 @@
       ]
     },
     {
+      "name": "Firestore",
+      "def": "파이어베이스의 데이터 저장소. 새로고침하거나 다른 기기에서 열어도 기록이 남는다",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
+    },
+    {
+      "name": "GA4",
+      "def": "방문자 계수기 서비스. 누가 언제 어디로 들어와 무엇을 봤는지 이벤트로 세어 준다",
+      "first": "2026-11-17",
+      "notes": [
+        "n-w4-day-02-blog-ga4"
+      ],
+      "works": [
+        "w4-blog",
+        "w4-ga-taxonomy",
+        "w4-ga-guide"
+      ]
+    },
+    {
       "name": "IA",
       "def": "화면들이 어떤 계층으로 이어지는지 정리한 구조표",
       "first": "2026-11-03",
@@ -108,6 +135,33 @@
       ]
     },
     {
+      "name": "로컬 서버",
+      "def": "내 컴퓨터에서만 열리는 작은 서버. 키를 들고 대신 AI를 불러 준다",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
+    },
+    {
+      "name": "링크 미리보기(OG)",
+      "def": "링크를 붙여 넣을 때 나오는 제목과 그림 카드. 서버가 주는 머리말 정보를 읽어서 만든다",
+      "first": "2026-11-17",
+      "notes": [
+        "n-w4-day-02-blog-ga4"
+      ],
+      "works": [
+        "w4-blog",
+        "w4-ga-taxonomy",
+        "w4-ga-guide"
+      ]
+    },
+    {
       "name": "마스킹",
       "def": "이름이나 번호의 일부를 가려서 보여 주는 처리",
       "first": "2026-11-06",
@@ -116,6 +170,19 @@
       ],
       "works": [
         "w2-event-form"
+      ]
+    },
+    {
+      "name": "맞춤 측정기준",
+      "def": "이벤트에 붙인 이름표(글 번호, 카테고리 등)를 GA에 등록해 두는 칸. 등록해야 글별, 카테고리별로 나눠 볼 수 있다",
+      "first": "2026-11-17",
+      "notes": [
+        "n-w4-day-02-blog-ga4"
+      ],
+      "works": [
+        "w4-blog",
+        "w4-ga-taxonomy",
+        "w4-ga-guide"
       ]
     },
     {
@@ -173,6 +240,19 @@
       ]
     },
     {
+      "name": "실패 로그",
+      "def": "막힌 증상, 원인, 해결을 주제별로 남긴 기록. 한도가 소진되어 다른 AI로 옮겨도 이어받을 수 있다",
+      "first": "2026-11-17",
+      "notes": [
+        "n-w4-day-02-blog-ga4"
+      ],
+      "works": [
+        "w4-blog",
+        "w4-ga-taxonomy",
+        "w4-ga-guide"
+      ]
+    },
+    {
       "name": "와이어프레임",
       "def": "색과 장식 없이 배치만 확인하려고 그린 단순한 화면 시안",
       "first": "2026-11-03",
@@ -198,15 +278,47 @@
       ]
     },
     {
+      "name": "운영자 지침",
+      "def": "관리자가 나쁜 답변을 보고 남긴 '이렇게 답해야 해요'를 모아 AI의 다음 답에 붙이는 규칙",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
+    },
+    {
+      "name": "응답 정책표",
+      "def": "질문 유형마다 서비스가 어떻게 답하기로 정했는지 적은 표",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
+    },
+    {
       "name": "이벤트 텍소노미",
       "def": "측정할 이벤트의 이름, 보내는 시점, 파라미터를 미리 정해 둔 분류표",
       "first": "2026-11-10",
       "notes": [
-        "n-w3-day-02-web-crawling-event-taxonomy"
+        "n-w3-day-02-web-crawling-event-taxonomy",
+        "n-w4-day-02-blog-ga4"
       ],
       "works": [
         "w3-event-webapp",
-        "w3-ab-test-plan"
+        "w3-ab-test-plan",
+        "w4-ga-taxonomy",
+        "w4-ga-guide",
+        "w4-blog"
       ]
     },
     {
@@ -243,6 +355,20 @@
       ]
     },
     {
+      "name": "테스트 케이스",
+      "def": "한 가지 기능을 입력, 기대 결과, 실제 결과로 적어 확인하는 시험 한 건",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
+    },
+    {
       "name": "프로젝트 지침",
       "def": "프로젝트 안의 모든 대화에 똑같이 적용되도록 미리 적어 두는 규칙",
       "first": "2026-11-04",
@@ -274,6 +400,19 @@
       ]
     },
     {
+      "name": "해시 주소",
+      "def": "주소 중간의 #로 화면만 바꾸는 방식. # 뒤는 서버에 전달되지 않아 글별 링크 미리보기가 안 된다",
+      "first": "2026-11-17",
+      "notes": [
+        "n-w4-day-02-blog-ga4"
+      ],
+      "works": [
+        "w4-blog",
+        "w4-ga-taxonomy",
+        "w4-ga-guide"
+      ]
+    },
+    {
       "name": "환각",
       "def": "AI가 없는 책이나 저자를 그럴듯하게 지어내는 현상",
       "first": "2026-11-11",
@@ -285,76 +424,6 @@
         "w3-asis-tobe",
         "w3-ux-slides",
         "w3-test-report"
-      ]
-    },
-    {
-      "name": "응답 정책표",
-      "def": "질문 유형마다 서비스가 어떻게 답하기로 정했는지 적은 표",
-      "first": "2026-11-16",
-      "notes": [
-        "n-w4-day-01-claude-code-chatbot"
-      ],
-      "works": [
-        "w4-chat-plan",
-        "w4-chat-research",
-        "w4-chat-test-report",
-        "w4-selectmarket-chat"
-      ]
-    },
-    {
-      "name": "로컬 서버",
-      "def": "내 컴퓨터에서만 열리는 작은 서버. 키를 들고 대신 AI를 불러 준다",
-      "first": "2026-11-16",
-      "notes": [
-        "n-w4-day-01-claude-code-chatbot"
-      ],
-      "works": [
-        "w4-chat-plan",
-        "w4-chat-research",
-        "w4-chat-test-report",
-        "w4-selectmarket-chat"
-      ]
-    },
-    {
-      "name": "운영자 지침",
-      "def": "관리자가 나쁜 답변을 보고 남긴 '이렇게 답해야 해요'를 모아 AI의 다음 답에 붙이는 규칙",
-      "first": "2026-11-16",
-      "notes": [
-        "n-w4-day-01-claude-code-chatbot"
-      ],
-      "works": [
-        "w4-chat-plan",
-        "w4-chat-research",
-        "w4-chat-test-report",
-        "w4-selectmarket-chat"
-      ]
-    },
-    {
-      "name": "테스트 케이스",
-      "def": "한 가지 기능을 입력, 기대 결과, 실제 결과로 적어 확인하는 시험 한 건",
-      "first": "2026-11-16",
-      "notes": [
-        "n-w4-day-01-claude-code-chatbot"
-      ],
-      "works": [
-        "w4-chat-plan",
-        "w4-chat-research",
-        "w4-chat-test-report",
-        "w4-selectmarket-chat"
-      ]
-    },
-    {
-      "name": "Firestore",
-      "def": "파이어베이스의 데이터 저장소. 새로고침하거나 다른 기기에서 열어도 기록이 남는다",
-      "first": "2026-11-16",
-      "notes": [
-        "n-w4-day-01-claude-code-chatbot"
-      ],
-      "works": [
-        "w4-chat-plan",
-        "w4-chat-research",
-        "w4-chat-test-report",
-        "w4-selectmarket-chat"
       ]
     }
   ]
