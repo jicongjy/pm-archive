@@ -26,6 +26,13 @@
       "period": "2026-11-09 ~ 11-13",
       "start": "2026-11-09",
       "end": "2026-11-13"
+    },
+    {
+      "id": "week-04",
+      "label": "4주차",
+      "period": "2026-11-16 ~ 11-20",
+      "start": "2026-11-16",
+      "end": "2026-11-20"
     }
   ],
   "works": [
@@ -201,6 +208,59 @@
       "links": [],
       "thumb": "assets/thumbs/w3-detail-page.jpg",
       "did": "35cm와 50cm 미니 진주트리를 소개하는 겨울 상품 상세페이지를 만들었다."
+    },
+    {
+      "id": "w4-chat-plan",
+      "week": "week-04",
+      "date": "2026-11-16",
+      "title": "4개 탭 답변 기획서",
+      "type": "기획 문서",
+      "summary": "쇼핑몰 이벤트 채팅 4개 탭이 질문에 답하는 흐름을 플로우차트로 그리고, 응답 정책표와 기능 정의서로 정리한 기획서입니다.",
+      "file": "works/week-04/261116_4개탭답변기획서_홍지영.html",
+      "links": [],
+      "thumb": "assets/thumbs/w4-chat-plan.jpg",
+      "did": "4개 탭이 질문에 어떻게 답하는지 플로우차트와 응답 정책표로 정리했다."
+    },
+    {
+      "id": "w4-chat-research",
+      "week": "week-04",
+      "date": "2026-11-16",
+      "title": "챗봇 레퍼런스 리서치",
+      "type": "기획 문서",
+      "summary": "퇴근 후 8시 스토어 챗봇을 개선하기 위해 챗봇 설계 원칙과 참고 화면을 조사하고, 지금 화면과 견줘 충족, 부분, 미충족으로 판정한 리서치입니다.",
+      "file": "works/week-04/261116_챗봇레퍼런스리서치_홍지영.html",
+      "links": [],
+      "thumb": "assets/thumbs/w4-chat-research.jpg",
+      "did": "챗봇 설계 원칙과 참고 화면을 조사해 지금 챗봇의 부족한 점을 표로 판정했다."
+    },
+    {
+      "id": "w4-chat-test-report",
+      "week": "week-04",
+      "date": "2026-11-16",
+      "title": "로컬 AI 챗봇 테스트 보고서",
+      "type": "보고서",
+      "summary": "내 컴퓨터에서 AI 챗봇을 시험 케이스 32건으로 직접 시험한 보고서입니다. 합격 23건, 보완 8건, 불합격 1건과 개선 우선순위를 담았습니다.",
+      "file": "works/week-04/261116_로컬AI챗봇테스트보고서_홍지영.pdf",
+      "links": [],
+      "thumb": "assets/thumbs/w4-chat-test-report.jpg",
+      "did": "시험 케이스 32건을 직접 돌려 합격, 보완, 불합격을 나누고 고칠 순서를 정했다."
+    },
+    {
+      "id": "w4-selectmarket-chat",
+      "week": "week-04",
+      "date": "2026-11-16",
+      "title": "셀렉트마켓 채팅",
+      "type": "프로토타입",
+      "summary": "취미 키트 스토어 '퇴근 후 8시'의 상담 챗봇입니다. 표에서 답할 수 있는 질문은 즉시 조회하고, 나머지는 AI가 답합니다. 대화 기록과 신고, 관리자 콘솔, 운영자 지침이 있습니다. AI 답변은 내 컴퓨터 서버에서만 동작합니다.",
+      "file": "works/week-04/261116_셀렉트마켓채팅_홍지영.html",
+      "links": [
+        {
+          "label": "배포판 열기",
+          "url": "https://jicongjy.github.io/pm-archive/selectmarket-chat/"
+        }
+      ],
+      "thumb": "assets/thumbs/w4-selectmarket-chat.jpg",
+      "did": "표로 답하는 질문과 AI가 답하는 질문을 나눈 상담 챗봇을 만들고, 대화 기록과 관리자 콘솔을 붙였다."
     }
   ]
 }
