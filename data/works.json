@@ -89,7 +89,16 @@
       "type": "프로토타입",
       "summary": "입력 규칙, 예외 처리, 중복 신청 판단을 갖춘 이벤트 신청 폼입니다.",
       "file": "works/week-02/261106_이벤트신청폼_홍지영.html",
-      "links": [],
+      "links": [
+        {
+          "label": "AI 스튜디오 앱 열기",
+          "url": "https://service-53269.ai.studio/"
+        },
+        {
+          "label": "소스 코드",
+          "url": "https://github.com/jicongjy/multicampus-aistudio"
+        }
+      ],
       "thumb": "assets/thumbs/w2-event-form.jpg",
       "did": "입력 규칙과 중복 신청 판단을 갖춘 이벤트 신청 폼을 만들고, 관리자 페이지까지 붙였다."
     },
@@ -113,7 +122,16 @@
       "type": "프로토타입",
       "summary": "이름, 연락처, 관심 여행지만 적어 신청하면 쿠폰 안내와 예약으로 이어지는 겨울여행 얼리버드 이벤트 웹앱입니다.",
       "file": "works/week-03/261110_이벤트웹앱_홍지영_7.html",
-      "links": [],
+      "links": [
+        {
+          "label": "실습 페이지 1",
+          "url": "https://lucky-figolla-602a95.netlify.app/"
+        },
+        {
+          "label": "실습 페이지 2",
+          "url": "https://comforting-rabanadas-bc4c60.netlify.app/"
+        }
+      ],
       "thumb": "assets/thumbs/w3-event-webapp.jpg",
       "did": "이름, 연락처, 관심 여행지만 받는 겨울여행 얼리버드 신청 웹앱을 만들었다."
     },
