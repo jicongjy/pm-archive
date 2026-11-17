@@ -1,6 +1,32 @@
 {
   "links": [
     {
+      "id": "l-ref-gemini-pm",
+      "title": "모델을 매일 만져 보는 PM을 뽑는다",
+      "url": "https://ailetter.ai.kr/ko/insights/gemini-tulsee-doshi-pm-ascendance",
+      "note": "제미나이 제품 총괄 인터뷰 기사 · AI 뉴스 데일리",
+      "date": "2026-11-17",
+      "week": "week-04",
+      "icon": "assets/links/l-ref-gemini-pm.png"
+    },
+    {
+      "id": "l-blog-repo",
+      "title": "블로그 소스와 작업 기록",
+      "url": "https://github.com/jicongjy/blog",
+      "note": "실패 로그와 학습 노트가 들어 있는 깃허브 저장소",
+      "date": "2026-11-17",
+      "week": "week-04",
+      "icon": "assets/links/l-blog-repo.png"
+    },
+    {
+      "id": "l-blog-site",
+      "title": "기획 노트 블로그",
+      "url": "https://jicongjy.github.io/blog/",
+      "note": "내가 만든 블로그 · 구글 로그인, GA4 측정",
+      "date": "2026-11-17",
+      "week": "week-04"
+    },
+    {
       "id": "l-ref-petfriends",
       "title": "펫프렌즈 모바일 홈 (챗봇 개선 참고)",
       "url": "https://m.pet-friends.co.kr/main/tab/2",

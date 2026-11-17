@@ -261,6 +261,51 @@
       ],
       "thumb": "assets/thumbs/w4-selectmarket-chat.jpg",
       "did": "표로 답하는 질문과 AI가 답하는 질문을 나눈 상담 챗봇을 만들고, 대화 기록과 관리자 콘솔을 붙였다."
+    },
+    {
+      "id": "w4-blog",
+      "week": "week-04",
+      "date": "2026-11-17",
+      "title": "기획 노트 블로그",
+      "type": "웹서비스",
+      "summary": "기획 글을 모아 두는 내 블로그입니다. 구글 로그인한 관리자만 글을 쓰고, 공개글과 나만보기 글, 카테고리를 관리합니다. 방문 행동은 GA4로 측정합니다.",
+      "file": "",
+      "links": [
+        {
+          "label": "블로그 열기",
+          "url": "https://jicongjy.github.io/blog/"
+        },
+        {
+          "label": "소스 코드와 작업 기록",
+          "url": "https://github.com/jicongjy/blog"
+        }
+      ],
+      "thumb": "assets/thumbs/w4-blog.jpg",
+      "did": "첫 화면 배포부터 관리자 로그인, 글쓰기, 카테고리 관리, 링크 미리보기, GA4 측정까지 하루에 만들어 출시했다."
+    },
+    {
+      "id": "w4-ga-taxonomy",
+      "week": "week-04",
+      "date": "2026-11-17",
+      "title": "블로그 GA4 이벤트 택소노미",
+      "type": "기획 문서",
+      "summary": "블로그를 왜 측정하는지에서 시작해, 알고 싶은 질문과 지표, 이벤트 5개와 매개변수 값을 정리한 설계 문서입니다.",
+      "file": "works/week-04/261117_이벤트택소노미_홍지영.pdf",
+      "links": [],
+      "thumb": "assets/thumbs/w4-ga-taxonomy.jpg",
+      "did": "알고 싶은 질문에서 출발해 이벤트 이름과 매개변수를 정하는 분류표를 만들었다."
+    },
+    {
+      "id": "w4-ga-guide",
+      "week": "week-04",
+      "date": "2026-11-17",
+      "title": "GA 구현과 보고서 보는 방법",
+      "type": "기획 문서",
+      "summary": "택소노미를 실제로 연결할 때의 구현 방식, GA 콘솔 설정(맞춤 측정기준 7개), 알고 싶은 것별로 어느 보고서를 볼지 정리한 참고 문서입니다.",
+      "file": "works/week-04/261117_GA구현과보고서보는법_홍지영.pdf",
+      "links": [],
+      "thumb": "assets/thumbs/w4-ga-guide.jpg",
+      "did": "이벤트 설계를 코드와 GA 콘솔에 옮기는 방법과 보고서 보는 곳을 표로 정리했다."
     }
   ]
 }
