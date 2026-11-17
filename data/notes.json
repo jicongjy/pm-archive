@@ -1,6 +1,54 @@
 {
   "notes": [
     {
+      "id": "n-w4-day-01-claude-code-chatbot",
+      "title": "2026-11-16 16일차 학습 노트",
+      "week": "week-04",
+      "date": "2026-11-16",
+      "summary": "셀렉트마켓 채팅을 내 컴퓨터에서 AI로 돌려 보고, 테스트 32건과 Firebase 배포까지 정리했다.",
+      "one": "셀렉트마켓 채팅을 내 컴퓨터에서 AI로 돌려 보고, 테스트 32건과 Firebase 배포까지 한 흐름으로 정리했다.",
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ],
+      "terms": [
+        "응답 정책표",
+        "로컬 서버",
+        "운영자 지침",
+        "테스트 케이스",
+        "Firestore"
+      ],
+      "html": "notes/n-w4-day-01-claude-code-chatbot.html",
+      "headings": [
+        "내 실습: 셀렉트마켓 채팅을 내 컴퓨터에서 AI로 돌리기",
+        "테스트에서 겪은 문제",
+        "배운 점",
+        "해 보고 싶은 것"
+      ],
+      "parts": [
+        {
+          "t": "내 실습: 셀렉트마켓 채팅을 내 컴퓨터에서 AI로 …",
+          "n": 335
+        },
+        {
+          "t": "테스트에서 겪은 문제",
+          "n": 217
+        },
+        {
+          "t": "배운 점",
+          "n": 188
+        },
+        {
+          "t": "해 보고 싶은 것",
+          "n": 71
+        }
+      ],
+      "sections": 4,
+      "mins": 2
+    },
+    {
       "id": "n-w3-day-04-admin-page-claude-desktop",
       "title": "2026-11-12 14일차 학습 노트",
       "week": "week-03",

@@ -286,6 +286,76 @@
         "w3-ux-slides",
         "w3-test-report"
       ]
+    },
+    {
+      "name": "응답 정책표",
+      "def": "질문 유형마다 서비스가 어떻게 답하기로 정했는지 적은 표",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
+    },
+    {
+      "name": "로컬 서버",
+      "def": "내 컴퓨터에서만 열리는 작은 서버. 키를 들고 대신 AI를 불러 준다",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
+    },
+    {
+      "name": "운영자 지침",
+      "def": "관리자가 나쁜 답변을 보고 남긴 '이렇게 답해야 해요'를 모아 AI의 다음 답에 붙이는 규칙",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
+    },
+    {
+      "name": "테스트 케이스",
+      "def": "한 가지 기능을 입력, 기대 결과, 실제 결과로 적어 확인하는 시험 한 건",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
+    },
+    {
+      "name": "Firestore",
+      "def": "파이어베이스의 데이터 저장소. 새로고침하거나 다른 기기에서 열어도 기록이 남는다",
+      "first": "2026-11-16",
+      "notes": [
+        "n-w4-day-01-claude-code-chatbot"
+      ],
+      "works": [
+        "w4-chat-plan",
+        "w4-chat-research",
+        "w4-chat-test-report",
+        "w4-selectmarket-chat"
+      ]
     }
   ]
 }
