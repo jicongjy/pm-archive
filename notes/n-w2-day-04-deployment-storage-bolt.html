@@ -1,10 +1,93 @@
 <p>작성일: 2026-11-05 (KST) 과정: AI 프로덕트 매니저 상태: v0.2 (v0.1 보강본)</p>
+<h2>오늘 한눈에 보기</h2>
+<div class="tbl"><table><thead><tr><th>시간대</th><th>한 일</th></tr></thead><tbody><tr><td>09:04</td><td>전날 교안의 후반부부터 이어서 시작</td></tr><tr><td>09:33 ~ 10:42</td><td>공통 시트에서 입력 폼 필드 정의서 실습. 시트의 아티팩트를 눌러 어떤 필드가 있는지 찾고, 추가한 부분은 파란색으로 표시. 추가 실습 1로 예외케이스를 빨간색으로 보완, 추가 실습 2로 예외별 대응과 피드백 방식 보완</td></tr><tr><td>10:43 ~ 11:40</td><td>워터폴과 애자일 비교, 기획자의 사고 범위 도식</td></tr><tr><td>13:10 ~ 13:43</td><td>Netlify Drop 배포. 새 프로젝트 만들기, 기존 프로젝트에 새 파일 올리기</td></tr><tr><td>13:43</td><td>마우스 우클릭, 검사로 모바일 반응형 화면 보기. 카카오톡 나에게 보내기로 링크를 보내 열어 보기</td></tr><tr><td>14:15 ~ 14:47</td><td>외부 사용자가 어떤 경로로 들어올지 생각해 보기. GitHub에 올린 html을 Vercel로 가져와 vercel.app 주소 만들기. 추가 실습으로 Claude 커넥터와 Claude in Chrome으로 배포 요청해 보기</td></tr><tr><td>15:05 ~ 15:43</td><td>신청서 입력 내용의 저장 위치 질문, 브라우저 임시 저장 코드 개선, 중복 신청 조건 확인, 개발자 도구에서 저장값 확인</td></tr><tr><td>16:10 ~ 16:30</td><td>볼트(bolt.new)로 첫 프롬프트 실행, 데이터베이스 확인, 퍼블리싱</td></tr><tr><td>17:00 이후</td><td>개인 정비와 실습</td></tr></tbody></table></div>
+<h2>오늘 나온 용어를 쉬운 말로</h2>
+<div class="tbl"><table><thead><tr><th>용어</th><th>쉬운 설명</th></tr></thead><tbody><tr><td>로컬</td><td>내 컴퓨터 안에서만 열리는 상태. 내 방 안에서만 보이는 그림과 같습니다.</td></tr><tr><td>배포</td><td>내 컴퓨터의 파일을 인터넷 주소로 열 수 있게 올리는 일. 방 안의 그림을 전시장에 걸어 누구나 보게 하는 것과 같습니다.</td></tr><tr><td>반응형</td><td>화면 크기에 맞춰 모양이 바뀌는 것. 물을 담는 그릇에 따라 물의 모양이 달라지는 것과 같습니다.</td></tr><tr><td>브라우저</td><td>크롬, 사파리처럼 웹 페이지를 열어 보여 주는 프로그램.</td></tr><tr><td>서버</td><td>인터넷 어딘가에서 늘 켜져 있으면서 요청을 받아 처리하는 컴퓨터. 24시간 문을 여는 가게 점원과 같습니다.</td></tr><tr><td>데이터베이스</td><td>여러 사람의 데이터를 한곳에 모아 두는 공용 장부.</td></tr><tr><td>브라우저 저장소(localStorage)</td><td>지금 쓰는 브라우저 안에 있는 작은 메모장. 내 브라우저에서만 보입니다.</td></tr><tr><td>개발자 도구</td><td>크롬에서 우클릭, 검사로 여는 도구. 화면 뒤에서 일어나는 일을 들여다보는 엑스레이 같은 것입니다.</td></tr><tr><td>커밋</td><td>고친 내용을 저장소에 기록하는 일. 일기장에 오늘 한 일을 한 줄 적는 것과 같습니다.</td></tr><tr><td>CD</td><td>깃허브에 올리면 자동으로 배포되는 흐름.</td></tr><tr><td>프리뷰 배포</td><td>실제 사이트는 그대로 두고 미리보기 주소를 따로 만드는 배포.</td></tr><tr><td>롤백</td><td>이전 배포로 되돌리기.</td></tr><tr><td>노코드, 웹 빌더</td><td>코드를 직접 쓰지 않고 말로 요청하거나 클릭으로 만드는 도구. 볼트가 여기에 속합니다.</td></tr><tr><td>토큰</td><td>볼트가 요청을 읽고 만들 때 쓰는 양. 무료 계정은 쓸 수 있는 양이 정해져 있습니다.</td></tr></tbody></table></div>
+<h2>1. 입력 폼 필드 정의서</h2>
+<h3>무엇을 했나</h3>
+<p>같은 신청 폼(이름, 소속, 이메일, 휴대폰 등)을 각자 정의서로 만들어 보는 실습이었습니다. 한 시트 안에 강사님 예시 탭과 수강생 탭이 나란히 있어서, 같은 폼도 사람마다 정의하는 깊이가 다르다는 점을 바로 비교할 수 있었습니다.</p>
+<h3>기본 열</h3>
+<div class="tbl"><table><thead><tr><th>열</th><th>내용</th></tr></thead><tbody><tr><td>No</td><td>필드 번호</td></tr><tr><td>제목</td><td>필드 이름 (이름, 이메일 등)</td></tr><tr><td>유형</td><td>입력필드, 선택박스, 체크박스, 드롭다운, 장문 입력필드</td></tr><tr><td>필수 또는 선택</td><td>비워도 제출되는지 여부</td></tr><tr><td>특이사항</td><td>입력 가능 문자, 형식 같은 기본 규칙</td></tr></tbody></table></div>
+<h3>내 정의서 예시 (일부)</h3>
+<p>기본 열만으로는 "이렇게 입력하면 어떻게 되는데?"에 답할 수 없어서, 글자 수, 검증 규칙, 예외사항, 피드백 열을 더 붙였습니다. 시트에서 읽히는 부분만 옮겼고, 길어서 잘린 칸은 생략했습니다.</p>
+<div class="tbl"><table><thead><tr><th>필드</th><th>글자 수와 규칙</th><th>예외 상황</th><th>피드백</th></tr></thead><tbody><tr><td>이름</td><td>2~20자, 한글과 영문 외 문자가 있으면 오류</td><td>영문 이름에 띄어쓰기를 넣은 경우</td><td>오류, 접수하지 않음, 입력칸 아래에 안내</td></tr><tr><td>이름</td><td>위와 같음</td><td>자음이나 모음만 입력한 경우 (예: ㄱㄴㄷ)</td><td>오류, 접수하지 않음, 입력칸 아래에 안내</td></tr><tr><td>이름</td><td>위와 같음</td><td>숫자나 특수문자를 붙여넣은 경우</td><td>붙여넣는 즉시 숫자와 특수문자를 지움</td></tr><tr><td>휴대폰 번호</td><td>숫자 10~11자리, 01로 시작하는 번호만 가능</td><td>하이픈이나 공백을 넣어 입력한 경우</td><td>숫자만 남기고 0XX-XXXX-XXXX 형식으로 정리</td></tr><tr><td>휴대폰 번호</td><td>위와 같음</td><td>+82로 시작하거나 02, 031 같은 지역번호로 입력한 경우</td><td>오류, 접수하지 않음</td></tr><tr><td>휴대폰 번호</td><td>위와 같음</td><td>이미 신청한 번호로 다시 신청한 경우</td><td>오류, 접수하지 않음, 팝업창으로 안내</td></tr><tr><td>이메일</td><td>최대 100자, @가 1개이고 뒤에 점이 있어야 함</td><td>대문자가 섞이거나 앞뒤에 공백이 붙은 경우</td><td>소문자로 바꾸고 공백을 지워 자동 정리</td></tr></tbody></table></div>
+<p>예외 하나마다 결과(막을지, 자동으로 고칠지)와 안내 위치(입력칸 아래, 팝업)까지 적어야 정의서가 끝난다는 점이 이번 실습의 핵심이었습니다.</p>
+<h3>다른 정의서에서 본 방식</h3>
+<p>같은 폼이라도 정의서를 쓰는 방식이 여러 가지였습니다.</p>
+<ol><li>글자 수 제한, 기능 제한 사항, 기능별 대응을 열로 나누기 (오류가 난 필드는 하단에 빨간 안내 문구)</li><li>기존 기능과 예외 사항을 열로 나누고, 예외에 번호 붙이기</li><li>개인정보 동의를 체크하지 않으면 신청 버튼을 비활성화하거나 안내 문구 보여 주기</li><li>참석 인원처럼 숫자 범위(1~10명)와 기본값을 정하고, 남기실 말씀에는 글자 수 표시(0/500) 넣기</li><li>다음 단계로 넘어가는 트리거를 정의하기</li></ol>
+<h2>2. 워터폴과 애자일, 기획자의 사고 범위</h2>
+<p>강사님이 이쯤에서 다시 생각해 보자며 두 방식을 비교해 주셨습니다.</p>
+<div class="tbl"><table><thead><tr><th>구분</th><th>진행 비중</th><th>확인하는 질문</th></tr></thead><tbody><tr><td>워터폴</td><td>설계 100%를 끝낸 뒤 개발</td><td>테스트가 설계도에 맞게 잘 되어 있는가</td></tr><tr><td>애자일</td><td>설계 20%, 디자인과 개발 50%, 사내 테스트 30%, 출시 이후에도 테스트</td><td>우리가 예상하지 못했던 문제는 없는가</td></tr></tbody></table></div>
+<p>워터폴은 "설계도대로 만들어졌는가"를 보고, 애자일은 "설계에 없던 문제가 나오지 않는가"를 봅니다. 그래서 기획자가 미리 생각해 두어야 하는 범위도 달라집니다. 이후 도식 링크로 두 방식을 비교해 기획자의 사고 범위를 구분해 주셨습니다.</p>
+<ul><li>사고 범위 도식(Claude 아티팩트): <a href="https://claude.ai/artifact/5tRWqLLTbD1JJVP3Vn2Lx4#waterfall" target="_blank" rel="noopener noreferrer">https://claude.ai/artifact/5tRWqLLTbD1JJVP3Vn2Lx4#waterfall</a> (이 노트에는 도식 내용을 아직 반영하지 못했습니다)</li></ul>
+<h2>3. 배포하기</h2>
+<h3>왜 배포하나</h3>
+<p>로컬에서만 확인하면 팀원이 볼 수 없습니다. 배포하면 주소 하나로 팀 안에서 공유할 수 있습니다. 오늘 수업의 질문도 "우리 사이트를 외부 사용자가 어떤 경로와 채널로 들어올까"였습니다.</p>
+<h3>Netlify Drop</h3>
+<ol><li>app.netlify.com/drop 에 접속합니다.</li><li>폴더, zip 파일, html 파일 하나를 끌어다 놓습니다.</li><li>몇 초 뒤 인터넷 주소가 생깁니다. 일부 주소는 비밀번호가 필요했고, 비밀번호는 접속 화면에 안내되어 있었습니다.</li><li>새 프로젝트를 만들어 올려 보고, 기존 프로젝트에 새 파일을 올려 업데이트도 해 봅니다.</li><li>올린 페이지를 크롬에서 우클릭, 검사로 열고 모바일 반응형 화면으로 바꿔서 봅니다.</li><li>카카오톡 나에게 보내기로 링크를 보내고, 카카오톡에서 눌렀을 때 잘 보이는지 확인합니다.</li></ol>
+<p>수업 중 강사님이 보여 주신 Netlify 주소는 아래와 같습니다.</p>
+<ul><li>Netlify Drop: <a href="https://app.netlify.com/drop" target="_blank" rel="noopener noreferrer">https://app.netlify.com/drop</a></li><li>강사님 예시 사이트 1: <a href="https://celadon-strudel-c778a3.netlify.app" target="_blank" rel="noopener noreferrer">https://celadon-strudel-c778a3.netlify.app</a></li><li>강사님 예시 사이트 2: <a href="https://fabulous-choux-0652ad.netlify.app" target="_blank" rel="noopener noreferrer">https://fabulous-choux-0652ad.netlify.app</a></li></ul>
+<h3>GitHub와 Vercel</h3>
+<ol><li>Netlify에 올린 것과 같은 html 파일을 GitHub 저장소에 올립니다.</li><li>Vercel에서 새 프로젝트를 만들고, GitHub 계정으로 로그인해 저장소를 이름으로 찾아 가져옵니다(import).</li><li>설정을 바꾸지 않고 Deploy를 누르면 최종적으로 vercel.app 주소가 생깁니다.</li></ol>
+<p>교안에는 이 흐름에서 나오는 말도 정리되어 있었습니다.</p>
+<div class="tbl"><table><thead><tr><th>말</th><th>뜻</th><th>이 장면에서</th></tr></thead><tbody><tr><td>커밋</td><td>고친 내용을 저장소에 기록</td><td>깃허브에서 Commit changes 누르기</td></tr><tr><td>트리거</td><td>배포를 시작하게 만드는 사건</td><td>main에 커밋하는 순간</td></tr><tr><td>CD</td><td>트리거가 생기면 자동으로 배포</td><td>Vercel이 커밋을 보고 사이트를 새로 만듦</td></tr><tr><td>프리뷰 배포</td><td>실제 사이트는 두고 미리보기 주소를 따로 만듦</td><td>main이 아닌 브랜치에 커밋할 때</td></tr><tr><td>롤백</td><td>이전 배포로 되돌리기</td><td>Vercel의 Instant Rollback</td></tr><tr><td>CI</td><td>배포 전에 자동으로 검사</td><td>오늘은 쓰지 않음. 그래서 오늘 만든 것은 CI/CD가 아니라 CD</td></tr></tbody></table></div>
+<p>교안에 나온 다른 수업의 Vercel 예시 주소입니다.</p>
+<ul><li><a href="https://swy-ab-practice.vercel.app" target="_blank" rel="noopener noreferrer">https://swy-ab-practice.vercel.app</a></li><li><a href="https://locallink-homepage.vercel.app" target="_blank" rel="noopener noreferrer">https://locallink-homepage.vercel.app</a></li><li>Vercel 새 프로젝트 만들기: <a href="https://vercel.com/new" target="_blank" rel="noopener noreferrer">https://vercel.com/new</a></li></ul>
+<h3>두 방법 비교</h3>
+<div class="tbl"><table><thead><tr><th>방법</th><th>올리는 법</th><th>고칠 때</th></tr></thead><tbody><tr><td>Netlify Drop</td><td>파일을 끌어다 놓기</td><td>고친 파일을 프로젝트 화면에 다시 끌어다 놓기</td></tr><tr><td>GitHub와 Vercel</td><td>GitHub에 올린 파일을 Vercel에서 가져오기</td><td>GitHub에서 고쳐 커밋하면 자동으로 다시 배포</td></tr></tbody></table></div>
+<p>위 표는 교안 설명을 정리한 것입니다. 교안의 Netlify 예시 주소는 <a href="https://selectmarket-event-page.netlify.app" target="_blank" rel="noopener noreferrer">https://selectmarket-event-page.netlify.app</a> 입니다.</p>
+<h3>추가 실습으로 안내받은 것</h3>
+<ul><li>Claude와 Vercel 커넥터를 연결한 뒤, 프롬프트로 소스코드를 바로 배포해 달라고 해 보기</li><li>커넥터 대신 Claude in Chrome(브라우저를 AI가 직접 움직이는 방식)으로 소스코드를 배포해 달라고 해 보기</li><li>커넥터를 연결한 분들은 관리자가 승인을 모두 해 두었다고 안내받았습니다.</li></ul>
+<p>교안은 이 세 가지 방법을 이렇게 구분했습니다. 연결 도구가 없는 사이트나 화면을 보며 해야 하는 일은 Claude in Chrome, Gmail 같은 서비스는 커넥터, 내 컴퓨터 파일 작업은 데스크톱 앱입니다.</p>
+<h2>4. 신청 내용은 어디에 저장될까</h2>
+<h3>질문</h3>
+<p>강사님의 질문은 "현재 아티팩트에는 사용자가 신청서에 입력한 내용이 어디에 저장되는가?"였습니다.</p>
+<h3>저장 방식 세 가지 비교</h3>
+<p>교안의 비교표를 정리했습니다.</p>
+<div class="tbl"><table><thead><tr><th>저장 방식</th><th>신청 직후</th><th>새로고침</th><th>다른 브라우저나 기기</th></tr></thead><tbody><tr><td>메모리(변수)</td><td>화면에는 보이지만 저장소는 비어 있음</td><td>사라짐</td><td>안 보임</td></tr><tr><td>브라우저 저장소(localStorage)</td><td>화면에 보이고 저장소에 줄이 생김</td><td>남음</td><td>안 보임</td></tr><tr><td>서버 데이터베이스</td><td>화면에 보이고 서버에 저장</td><td>남음</td><td>보임</td></tr></tbody></table></div>
+<p>같은 크롬이어도 시크릿 창이나 다른 배포 주소(Netlify 주소와 Vercel 주소)에서는 저장 공간이 따로라 보이지 않습니다.</p>
 <h3>제가 만든 이벤트 신청 폼 실습 기록</h3>
 <p>수업 질문에 맞춰 제 신청 폼을 단계별로 고쳐 보았습니다.</p>
 <div class="tbl"><table><thead><tr><th>단계</th><th>바꾼 것</th></tr></thead><tbody><tr><td>1</td><td>에러 메시지를 빨간색으로 바꾸고, 오류가 난 입력칸 테두리도 빨간색으로 표시</td></tr><tr><td>2</td><td>신청하기를 누르면 폼 화면이 사라지고 별도의 완료 화면 보여 주기</td></tr><tr><td>3</td><td>처음에는 입력한 내용이 어디에도 저장되지 않는다는 것을 확인</td></tr><tr><td>4</td><td>신청 내용을 브라우저에 임시 저장하고, 신청 명단 조회와 전체 삭제 버튼 추가</td></tr><tr><td>5</td><td>휴대폰 번호를 필수로 변경</td></tr><tr><td>6</td><td>중복 신청이 어떤 조건으로 판단되는지 코드로 확인</td></tr></tbody></table></div>
 <p>저장 방식에서 확인한 한계입니다.</p>
 <ol><li>신청 명단이 그 브라우저에만 있어서, 여러 사람이 신청하는 이벤트의 실제 접수 명단으로는 쓸 수 없습니다. 연습과 시연용입니다.</li><li>명단 버튼이 신청자에게도 보이면, 같은 컴퓨터를 쓰는 다음 사람이 앞 사람의 이름과 연락처를 볼 수 있습니다.</li><li>브라우저 데이터를 지우면 명단도 사라집니다.</li><li>입력규칙표(정의서)에는 휴대폰이 선택으로 적혀 있는데 폼에서는 필수로 바꿔서, 서로 맞춰야 합니다.</li></ol>
+<h3>중복 신청은 어떻게 판단했나</h3>
+<ol><li>입력값 검사를 모두 통과한 뒤에 중복 검사를 합니다.</li><li>입력한 휴대폰 번호가 저장된 명단에 이미 있으면 중복으로 보고 접수하지 않으며, "이미 신청된 번호입니다." 팝업을 띄웁니다.</li><li>판단 기준은 휴대폰 번호 한 가지입니다. 이름이나 이메일은 보지 않습니다.</li><li>번호는 숫자만 남기고 0XX-XXXX-XXXX 모양으로 자동 통일하기 때문에, "0XX-XXXX-XXXX"과 "0XX-XXXX-XXXX"은 같은 번호로 비교됩니다.</li><li>한계는 두 가지입니다. 번호가 다른 같은 사람은 걸러지지 않고, 다른 브라우저에서 신청한 번호와는 비교할 수 없습니다.</li></ol>
+<h3>개발자 도구에서 저장값 보기</h3>
+<ol><li>크롬에서 우클릭, 검사로 개발자 도구를 엽니다.</li><li>위쪽 Application 탭을 누르고, 왼쪽 Storage의 Local storage 아래 내 사이트 주소를 누릅니다.</li><li>신청을 넣으면 오른쪽 표에 줄이 생기고, 줄을 누르면 저장된 내용이 펼쳐집니다.</li></ol>
+<p>수업에서는 아래 세 가지를 직접 확인하라고 안내받았습니다.</p>
+<ol><li>새로고침해도 남아 있는가</li><li>강제 새로고침(저장된 파일을 무시하고 다시 불러오는 새로고침)해도 남아 있는가</li><li>새 브라우저 창을 띄워 같은 주소로 들어가도 보이는가</li></ol>
+<p>3번이 잘 안 되는 경우에는 지금 로그인된 브라우저 자체를 확인해 보라는 안내가 있었습니다. 저장된 이름과 연락처가 글자 그대로 보이기 때문에, 브라우저 저장소에는 실제 개인정보를 넣지 않는 것이 안전합니다.</p>
+<h2>5. 볼트(bolt.new)</h2>
+<h3>볼트란</h3>
+<p>말로 요청하면 웹 앱을 만들어 주는 AI 앱 빌더입니다. 화면 만들기, 데이터베이스, 공개(배포)를 한곳에서 할 수 있습니다. 이전에는 파일을 내려받아 깃허브에 올려야 했지만, 볼트는 만들기부터 공개까지 한 화면에서 합니다.</p>
+<h3>오늘 흐름</h3>
+<div class="tbl"><table><thead><tr><th>단계</th><th>한 일</th><th>확인할 것</th></tr></thead><tbody><tr><td>1</td><td>Hello 문구, 이름 입력칸 하나, 저장 버튼만 있는 페이지를 최소한의 디자인으로 만들어 달라고 한 줄 요청</td><td>미리보기에 세 가지가 보이는지</td></tr><tr><td>2</td><td>입력한 이름이 볼트 데이터베이스에 저장되게 연결해 달라고 한 줄 요청</td><td>Database 화면의 표에 이름이 한 줄 생겼는지</td></tr><tr><td>3</td><td>Publish로 공개하고 휴대폰에서 다른 가상 이름 저장</td><td>컴퓨터의 Database 화면에 줄이 늘었는지</td></tr></tbody></table></div>
+<h3>알아 둘 점</h3>
+<ol><li>"저장되었습니다" 문구만 믿지 않고 데이터베이스 화면을 열어 직접 확인합니다. 표 목록에는 0 rows로 보여도 표를 열면 있을 수 있습니다.</li><li>공개한 주소는 누구나 열고 이름을 넣을 수 있어서 가상의 이름만 넣습니다.</li><li>무료로 공개한 사이트에는 "Made in Bolt" 표시가 붙습니다.</li><li>교안 기준(강사님 확인 2026-11-05)으로 무료 계정은 하루 토큰 한도가 있고, 남은 양은 다음 날로 넘어가지 않습니다. 변동될 수 있어서 공식 화면에서 다시 확인하는 것이 좋습니다. 그래서 프롬프트는 짧게 쓰고, 고칠 것은 모아서 한 번에 보냅니다.</li><li>데이터베이스 연결은 화면만 만들 때보다 토큰을 더 씁니다.</li></ol>
+<ul><li>볼트: <a href="https://bolt.new" target="_blank" rel="noopener noreferrer">https://bolt.new</a></li></ul>
 <h2>6. 오늘 느낀 점</h2>
 <ul><li>필드 정의를 더 체계적이고 상세하게 하는 방법을 배웠습니다.</li><li>개발한 결과를 로컬에서만 확인해야 해서 팀에 공유하기 어려워 고민한 적이 많았는데, Netlify는 그럴 때 정말 좋은 도구인 것 같습니다.</li><li>볼트는 처음 써 봤고, 개발과 데이터베이스, 배포까지 한 번에 되는 편한 올인원 도구인 것 같습니다.</li><li>개발자 도구에서 저장값을 확인할 수 있다는 것도 처음 알았습니다.</li></ul>
 <h2>7. 해 보고 싶은 것</h2>
 <p>신청 폼을 카카오톡 등에서 열리는 브라우저를 포함해 다양한 환경에서 점검해 보고 싶습니다. 다양한 노코드 도구와 배포 도구도 써 보려고 합니다.</p>
+<h2>오늘의 회고</h2>
+<h3>1. 이미 알고 있었던 내용</h3>
+<ol><li>Vercel로 배포해 본 경험</li><li>필드 정의에서 예외 처리를 해 본 경험</li></ol>
+<h3>2. 새로 배운 내용</h3>
+<ol><li>필드 정의를 더 체계적이고 상세하게 하는 방법을 배웠습니다.</li><li>개발한 결과를 로컬에서만 확인해야 해서 팀에 공유하기 어려워 고민한 적이 많았는데, Netlify는 그럴 때 정말 좋은 도구인 것 같습니다.</li><li>볼트는 처음 써 봤고, 개발과 데이터베이스, 배포까지 한 번에 되는 편한 올인원 도구인 것 같습니다.</li><li>개발자 도구에서 저장값을 확인할 수 있다는 것도 처음 알았습니다.</li></ol>
+<h3>3. 새롭게 도전/연습할 목표</h3>
+<ol><li>신청 폼을 카카오톡 등에서 열리는 브라우저를 포함해 다양한 환경에서 점검해 보고 싶습니다.</li><li>다양한 노코드 도구와 배포 도구도 써 보려고 합니다.</li></ol>
+<h2>8. 교안에서 더 읽어 볼 것</h2>
+<p>아래는 같은 교안에 있는 내용입니다. 오늘 수업에서 어디까지 진행했는지 확인되지 않아 참고용으로만 적습니다.</p>
+<ol><li>도구를 고르는 세 기준: 원본 코드가 어디에 저장되나, 어디서 실행되나, 어디까지 대신 해 주나. 도구 이름 대신 기준으로 보면 새 도구가 나와도 비교할 수 있습니다.</li><li>신청 데이터 정의: 입력, 저장, 삭제, 기본 데이터로 나누어 적습니다. 기본 데이터는 사용자가 아무것도 하기 전에 시스템에 이미 있어야 하는 값입니다.</li><li>콘솔 로그: 저장 성공은 console.log, 중복 같은 주의는 console.warn, 형식 오류 같은 실패는 console.error로 남겨 개발자 도구에서 읽습니다. 로그에 이름과 연락처 같은 개인정보는 남기지 않습니다.</li><li>index.html 한 파일로 만드는 이유: PM 프로토타입은 파일 하나로 보내고 올리기 쉽고, 실제 서비스는 개발자가 파일을 나누어 다시 만듭니다.</li><li>시안 3개 비교: 시안을 고르는 기준은 취향이 아니라 PRD의 가설입니다.</li></ol>
+<h2>참고 링크</h2>
+<h3>수업 자료</h3>
+<ul><li>교안 DAY 3 후반부: <a href="https://loreenkim0301.github.io/swy-lecturenote/261102-ai-pm-week2/d3-deploy-localdb.html#s7" target="_blank" rel="noopener noreferrer">https://loreenkim0301.github.io/swy-lecturenote/261102-ai-pm-week2/d3-deploy-localdb.html#s7</a></li><li>교안 DAY 4 도구 비교와 볼트: <a href="https://loreenkim0301.github.io/swy-lecturenote/261102-ai-pm-week2/d4-vibe-tools-bolt.html" target="_blank" rel="noopener noreferrer">https://loreenkim0301.github.io/swy-lecturenote/261102-ai-pm-week2/d4-vibe-tools-bolt.html</a></li><li>워터폴과 애자일 사고 범위 도식: <a href="https://claude.ai/artifact/5tRWqLLTbD1JJVP3Vn2Lx4#waterfall" target="_blank" rel="noopener noreferrer">https://claude.ai/artifact/5tRWqLLTbD1JJVP3Vn2Lx4#waterfall</a></li></ul>
+<h3>배포와 도구</h3>
+<ul><li>Netlify Drop: <a href="https://app.netlify.com/drop" target="_blank" rel="noopener noreferrer">https://app.netlify.com/drop</a></li><li>Vercel 새 프로젝트: <a href="https://vercel.com/new" target="_blank" rel="noopener noreferrer">https://vercel.com/new</a></li><li>볼트: <a href="https://bolt.new" target="_blank" rel="noopener noreferrer">https://bolt.new</a></li></ul>
+<h3>강사님 예시 사이트</h3>
+<ul><li><a href="https://celadon-strudel-c778a3.netlify.app" target="_blank" rel="noopener noreferrer">https://celadon-strudel-c778a3.netlify.app</a></li><li><a href="https://fabulous-choux-0652ad.netlify.app" target="_blank" rel="noopener noreferrer">https://fabulous-choux-0652ad.netlify.app</a></li><li><a href="https://selectmarket-event-page.netlify.app" target="_blank" rel="noopener noreferrer">https://selectmarket-event-page.netlify.app</a></li><li><a href="https://swy-ab-practice.vercel.app" target="_blank" rel="noopener noreferrer">https://swy-ab-practice.vercel.app</a></li><li><a href="https://locallink-homepage.vercel.app" target="_blank" rel="noopener noreferrer">https://locallink-homepage.vercel.app</a></li></ul>
+<h3>내가 실습한 링크</h3>
+<ul><li>2026-11-03 유즈케이스 시나리오 연습(구글 스프레드시트): <a href="https://docs.google.com/spreadsheets/d/1AmqNaCtE07ADmD7S9FTpfo2QIdk4h_NS-0486pGTVI4/edit?usp=sharing" target="_blank" rel="noopener noreferrer">https://docs.google.com/spreadsheets/d/1AmqNaCtE07ADmD7S9FTpfo2QIdk4h_NS-0486pGTVI4/edit?usp=sharing</a></li><li>2026-11-04 PRD 템플릿 사본에 온라인몰 제안 내용을 채운 문서(구글 문서): <a href="https://docs.google.com/document/d/1lNpNV3FDt-eSslE8xsPWbaO5EipLfoTkloRtNP9tieE/edit?usp=sharing" target="_blank" rel="noopener noreferrer">https://docs.google.com/document/d/1lNpNV3FDt-eSslE8xsPWbaO5EipLfoTkloRtNP9tieE/edit?usp=sharing</a></li><li>2026-11-05 공통 시트의 내 탭: 위의 공통 실습 시트 링크</li></ul>
+<h2>보강할 것</h2>
+<ul><li>워터폴과 애자일 도식 내용</li><li>볼트 실습의 직접 결과 화면</li><li>직접 배포해서 받은 Netlify와 Vercel 주소 (공개 전에 개인정보가 없는지 확인)</li></ul>
