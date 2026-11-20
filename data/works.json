@@ -324,6 +324,18 @@
       "links": [],
       "thumb": "assets/thumbs/w4-ga-guide.jpg",
       "did": "이벤트 설계를 코드와 GA 콘솔에 옮기는 방법과 보고서 보는 곳을 표로 정리했다."
+    },
+    {
+      "id": "w4-weather",
+      "week": "week-04",
+      "date": "2026-11-18",
+      "title": "세계 날씨 테스트",
+      "type": "프로토타입",
+      "summary": "OpenWeather로 도시를 검색해 지금 날씨, 24시간 기온 곡선, 5일 예보를 한 장에서 보여 주는 날씨 사이트입니다. 인증 키는 파일에 넣지 않고 쓰는 브라우저에만 저장합니다.",
+      "file": "works/week-04/261118_세계날씨테스트_홍지영.html",
+      "links": [],
+      "thumb": "assets/thumbs/w4-weather.jpg",
+      "did": "도시를 검색하면 하늘 카드, 시간별 기온 곡선, 습도와 바람 시각화, 5일 예보가 나오는 날씨 사이트를 만들었다."
     }
   ]
 }
