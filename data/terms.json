@@ -88,6 +88,15 @@
       ]
     },
     {
+      "name": "UTM",
+      "def": "링크 끝에 붙이는 꼬리표. 어느 채널과 캠페인에서 왔는지 GA가 읽어서 채널별로 나눠 볼 수 있다",
+      "first": "2026-11-19",
+      "notes": [
+        "n-w4-day-04-chrome-extension-utm"
+      ],
+      "works": []
+    },
+    {
       "name": "UX 점검",
       "def": "화면 상태를 기준별로 확인해 문제와 양호한 곳을 나누는 일",
       "first": "2026-11-11",
@@ -102,6 +111,17 @@
       ]
     },
     {
+      "name": "가상 페이지뷰",
+      "def": "주소가 바뀌지 않는 사이트에서 화면이 바뀔 때마다 페이지 조회를 직접 보내는 방법",
+      "first": "2026-11-18",
+      "notes": [
+        "n-w4-day-03-ga-api-widgets"
+      ],
+      "works": [
+        "w4-blog"
+      ]
+    },
+    {
       "name": "가설",
       "def": "이렇게 바꾸면 지표가 이렇게 달라질 것이라는, 아직 검증하지 않은 예상",
       "first": "2026-11-02",
@@ -109,6 +129,17 @@
         "n-w2-day-01-problem-definition"
       ],
       "works": []
+    },
+    {
+      "name": "개방형 API",
+      "def": "키 없이 주소만으로 요청할 수 있는 API. 키를 받아야 쓰는 것은 인증형이다",
+      "first": "2026-11-18",
+      "notes": [
+        "n-w4-day-03-ga-api-widgets"
+      ],
+      "works": [
+        "w4-blog"
+      ]
     },
     {
       "name": "개인정보 수집 이용 동의",
@@ -122,6 +153,15 @@
       ]
     },
     {
+      "name": "개인정보처리방침",
+      "def": "어떤 정보를 모으고 어디에 보관하고 어떻게 지우는지 적은 공개 문서. 스토어가 로그인 없이 열리는 주소를 요구한다",
+      "first": "2026-11-19",
+      "notes": [
+        "n-w4-day-04-chrome-extension-utm"
+      ],
+      "works": []
+    },
+    {
       "name": "관리자 페이지",
       "def": "신청 내역을 보고 고치고 지우는, 운영하는 사람용 화면",
       "first": "2026-11-06",
@@ -133,6 +173,24 @@
         "w2-event-form",
         "w3-reading-menu"
       ]
+    },
+    {
+      "name": "권한",
+      "def": "확장 프로그램이 크롬에게 받는 허락 목록. 넓을수록 심사와 설치 경고 부담이 커져서 꼭 필요한 것만 쓴다",
+      "first": "2026-11-19",
+      "notes": [
+        "n-w4-day-04-chrome-extension-utm"
+      ],
+      "works": []
+    },
+    {
+      "name": "단축 URL",
+      "def": "UTM이 붙은 긴 주소를 짧게 줄여 주는 서비스. 채널마다 따로 만들어야 섞이지 않는다",
+      "first": "2026-11-19",
+      "notes": [
+        "n-w4-day-04-chrome-extension-utm"
+      ],
+      "works": []
     },
     {
       "name": "로컬 서버",
@@ -184,6 +242,15 @@
         "w4-ga-taxonomy",
         "w4-ga-guide"
       ]
+    },
+    {
+      "name": "매니페스트(manifest.json)",
+      "def": "확장 프로그램의 이름, 버전, 쓸 권한을 적어 두는 신분증 같은 파일. 크롬이 설치할 때 가장 먼저 읽는다",
+      "first": "2026-11-19",
+      "notes": [
+        "n-w4-day-04-chrome-extension-utm"
+      ],
+      "works": []
     },
     {
       "name": "문제 정의",
@@ -316,9 +383,9 @@
       "works": [
         "w3-event-webapp",
         "w3-ab-test-plan",
+        "w4-blog",
         "w4-ga-taxonomy",
-        "w4-ga-guide",
-        "w4-blog"
+        "w4-ga-guide"
       ]
     },
     {
@@ -327,6 +394,15 @@
       "first": "2026-11-02",
       "notes": [
         "n-w2-day-01-problem-definition"
+      ],
+      "works": []
+    },
+    {
+      "name": "전용 목적",
+      "def": "확장 프로그램이 하는 한 가지 일을 적은 문장. 심사자가 권한이 이 목적에 꼭 필요한지 본다",
+      "first": "2026-11-19",
+      "notes": [
+        "n-w4-day-04-chrome-extension-utm"
       ],
       "works": []
     },
@@ -400,6 +476,17 @@
       ]
     },
     {
+      "name": "해시",
+      "def": "원래 값을 되돌릴 수 없는 다른 값으로 바꾸는 것. 같은 값은 항상 같은 결과가 나온다",
+      "first": "2026-11-18",
+      "notes": [
+        "n-w4-day-03-ga-api-widgets"
+      ],
+      "works": [
+        "w4-blog"
+      ]
+    },
+    {
       "name": "해시 주소",
       "def": "주소 중간의 #로 화면만 바꾸는 방식. # 뒤는 서버에 전달되지 않아 글별 링크 미리보기가 안 된다",
       "first": "2026-11-17",
@@ -424,6 +511,17 @@
         "w3-asis-tobe",
         "w3-ux-slides",
         "w3-test-report"
+      ]
+    },
+    {
+      "name": "활성 사용자",
+      "def": "정해진 기간에 사이트에 실제로 참여한 사람 수. GA 보고서에서 사용자라고 하면 보통 이 숫자다",
+      "first": "2026-11-18",
+      "notes": [
+        "n-w4-day-03-ga-api-widgets"
+      ],
+      "works": [
+        "w4-blog"
       ]
     }
   ]
